@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+int findLastOccurrence(int arr[], int low, int high, int target) {
+    int result = -1;
+    
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        
+        if (arr[mid] == target) {
+            result = mid;
+            low = mid + 1;  // continue searching in the right part
+        }
+        else if (arr[mid] < target)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    
+    return result;
+}
+
+int main() {
+    int arr[] = {1, 2, 2, 2, 3, 4, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target = 2;
+    
+    int result = findLastOccurrence(arr, 0, n - 1, target);
+    cout << "Last occurrence of " << target << " is at index: " << result << endl;
+    return 0;
+}
