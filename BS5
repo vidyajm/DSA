@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int findCeil(int arr[], int low, int high, int target) {
+    int result = -1;
+    
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        
+        if (arr[mid] >= target) {
+            result = mid;
+            high = mid - 1;
+        }
+        else
+            low = mid + 1;
+    }
+    
+    return result;
+}
+
+int main() {
+    int arr[] = {1, 2, 8, 10, 10, 12, 19};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target = 5;
+    
+    int result = findCeil(arr, 0, n - 1, target);
+    cout << "The smallest element greater than or equal to " << target << " is at index: " << result << endl;
+    return 0;
+}
