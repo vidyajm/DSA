@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int findFloor(int arr[], int low, int high, int target) {
+    int result = -1;
+    
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        
+        if (arr[mid] <= target) {
+            result = mid;
+            low = mid + 1;
+        }
+        else
+            high = mid - 1;
+    }
+    
+    return result;
+}
+
+int main() {
+    int arr[] = {1, 2, 8, 10, 10, 12, 19};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target = 14;
+    
+    int result = findFloor(arr, 0, n - 1, target);
+    cout << "The largest element less than or equal to " << target << " is at index: " << result << endl;
+    return 0;
+}
