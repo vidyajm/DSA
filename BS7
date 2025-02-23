@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+int rotatedBinarySearch(int arr[], int low, int high, int target) {
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        
+        if (arr[mid] == target)
+            return mid;
+        
+        // Check if left half is sorted
+        if (arr[low] <= arr[mid]) {
+            if (arr[low] <= target && target < arr[mid])
+                high = mid - 1;
+            else
+                low = mid + 1;
+        }
+        else {  // Right half is sorted
+            if (arr[mid] < target && target <= arr[high])
+                low = mid + 1;
+            else
+                high = mid - 1;
+        }
+    }
+    return -1;
+}
+
+int main() {
+    int arr[] = {6, 7, 9, 15, 19, 2, 3};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target = 15;
+    
+    int result = rotatedBinarySearch(arr, 0, n - 1, target);
+    cout << (result != -1 ? "Element found at index " : "Element not found") << result << endl;
+    return 0;
+}
